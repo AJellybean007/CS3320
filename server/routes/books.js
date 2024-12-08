@@ -75,7 +75,6 @@ router.put("/checkin/:id", async (req, res) => {
 // Add a new book
 router.post("/", async (req, res) => {
     let book = await Book.findOne({isbn : req.body.isbn});
-    console.log(book);
     if(book) {
         res.json("Book already exists");
     }
@@ -93,14 +92,18 @@ router.post("/", async (req, res) => {
 // Update book information
 router.put("/:id", async (req, res) => {
     let id = req.params['id'];
-    try {
-        const book = await Book.updateOne(
-            {isbn : id}, 
-            {$set: {title: req.body.title, author: req.body.author, publisher: req.body.publisher, isbn: req.body.isbn}}, 
-            { new: true });
-        res.json(book);
-    } catch (error) {
-        res.status(500).json({ error: "Failed to update the book." });
+    const book = await Book.findOne({isbn : id});
+    if(!book) res.json("Book does not exist.");
+    else {
+        try {
+            const book = await Book.updateOne(
+                {isbn : id}, 
+                {$set: {title: req.body.title, author: req.body.author, publisher: req.body.publisher, isbn: req.body.isbn}}, 
+                { new: true });
+            res.json(book);
+        } catch (error) {
+            res.status(500).json({ error: "Failed to update the book." });
+        }
     }
 });
 

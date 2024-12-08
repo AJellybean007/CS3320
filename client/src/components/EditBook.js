@@ -23,6 +23,9 @@ const EditBook = () => {
         if(upBook.error){
             alert("Failed to update the book");
         }
+        else if(upBook === "Book does not exist.") {
+            alert("Error: Book is not in library.");
+        }
         else {
             alert("Book updated successfully!");
             setBook({
@@ -37,7 +40,7 @@ const EditBook = () => {
 
     return (
         <div>
-            <h1>Edit Book</h1>
+            <h1 className = "App-book-header">Edit Book</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>ISBN of book to be changed:</label>

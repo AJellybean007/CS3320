@@ -32,7 +32,7 @@ const AddBook = () => {
 
     return (
         <div>
-            <h1>Add a Book</h1>
+            <h1 className = "App-book-header">Add a Book</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Title:</label>

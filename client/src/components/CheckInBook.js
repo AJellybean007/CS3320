@@ -31,7 +31,7 @@ const CheckInBook = () => {
 
     return (
         <div>
-            <h1>Check In a Book</h1>
+            <h1 className = "App-book-header">Check In a Book</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Book ISBN:</label>

@@ -37,30 +37,52 @@ const BooksList = () => {
     const checkedOutBooks = books.filter(book => book.status === "Checked Out");
 
     return (
-        <div>
-            <h1>Books List</h1>
-            <h2>Available Books</h2>
+        <div className = "Book-div">
+            <h1 className = "App-book-header">Books List</h1>
+            <h2 className = "App-mini-header">Available Books</h2>
             {availableBooks.length > 0 ? (
-                <ul>
+                <table cellspacing="0">
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Publisher</th>
+                        <th>ISBN</th>
+                    </tr>
                     {availableBooks.map((book) => (
-                        <li key={book._id}>
-                            {book.title} by {book.author}, ISBN: {book.isbn}
-                        </li>
+                        <tr key={book._id}>
+                            <td>{book.title}</td>
+                            <td>{book.author}</td>
+                            <td>{book.publisher}</td>
+                            <td>{book.isbn}</td>
+                        </tr>
                     ))}
-                </ul>
+                </table>
             ) : (
                 <p>No available books.</p>
             )}
 
-            <h2>Checked-Out Books</h2>
+            <h2 className = "App-mini-header">Checked-Out Books</h2>
             {checkedOutBooks.length > 0 ? (
-                <ul>
-                    {checkedOutBooks.map((book) => (
-                        <li key={book._id}>
-                            {book.title} - Checked out by {book.checkedOutBy} (Due: {book.dueDate.toString().substring(0, 10)})
-                        </li>
-                    ))}
-                </ul>
+                <table cellspacing="0">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>ISBN</th>
+                    <th>Due Date</th>
+                    <th>Checked Out By</th>
+                </tr>
+                {checkedOutBooks.map((book) => (
+                    <tr key={book._id}>
+                        <td>{book.title}</td>
+                        <td>{book.author}</td>
+                        <td>{book.publisher}</td>
+                        <td>{book.isbn}</td>
+                        <td>{book.dueDate.substring(0, 10)}</td>
+                        <td>{book.checkedOutBy}</td>
+                    </tr>
+                ))}
+            </table>
             ) : (
                 <p>No books are currently checked out.</p>
             )}
